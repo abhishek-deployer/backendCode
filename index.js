@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-
+const mongoose =require("mongoose")
+mongoose.connect(`mongodb+srv://abhishek2019kr:w4D8e0e9TgqedXgh@cluster0.hvorilr.mongodb.net/Backend`)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
