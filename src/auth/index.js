@@ -12,6 +12,13 @@ const jwtSecretKey = 'yourSecretKey';
 const signup = async (req, res) => {
   const { username, password } = req.body;
 
+  // Check if the username already exists
+  const existingUser = await User.findOne({ username });
+
+  if (existingUser) {
+    return res.status(409).json({ message: 'Username already exists' });
+  }
+
   // Validate using the schema
   const validation = User.validate({ username, password });
 
@@ -34,12 +41,14 @@ const signup = async (req, res) => {
   }
 };
 
+
 // Login controller
 const login = async (req, res) => {
   const { username, password } = req.body;
 
   // Validate using the schema
   const validation = User.validate({ username, password });
+  console.log("validate",validation)
 
   if (validation.error) {
     return res.status(400).send(validation.error.details[0].message);

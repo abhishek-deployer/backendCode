@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const port = 8000;
+const cors = require('cors');
 const app = express();
-const port = 3000;
+app.use(cors());
 const mongoose =require("mongoose")
 mongoose.connect(`mongodb+srv://abhishek2019kr:w4D8e0e9TgqedXgh@cluster0.hvorilr.mongodb.net/Backend`)
 app.use(bodyParser.json());
