@@ -63,7 +63,7 @@ const login = async (req, res) => {
     }
 
     // Generate token on successful login
-    const token = jwt.sign({ username }, jwtSecretKey);
+    const token = jwt.sign({ username, name: user.name  }, jwtSecretKey);
 
     res.json({ message: 'Login successful', token });
   } catch (error) {
