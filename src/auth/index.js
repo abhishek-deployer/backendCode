@@ -10,7 +10,7 @@ const jwtSecretKey = 'yourSecretKey';
 
 // Signup controller
 const signup = async (req, res) => {
-  const { username, password } = req.body;
+  const {name, username, password } = req.body;
 
   // Check if the username already exists
   const existingUser = await User.findOne({ username });
@@ -20,7 +20,7 @@ const signup = async (req, res) => {
   }
 
   // Validate using the schema
-  const validation = User.validate({ username, password });
+  const validation = User.validate({ name,username, password });
 
   if (validation.error) {
     return res.status(400).send(validation.error.details[0].message);
@@ -28,11 +28,11 @@ const signup = async (req, res) => {
 
   try {
     // Create a new user in the database
-    const newUser = new User({ username, password });
+    const newUser = new User({ name,username, password });
     await newUser.save();
 
     // Generate token
-    const token = jwt.sign({ username }, jwtSecretKey);
+    const token = jwt.sign({ name, username }, jwtSecretKey);
 
     res.status(201).json({ message: 'User created successfully', token });
   } catch (error) {
