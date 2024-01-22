@@ -11,10 +11,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Importing routes
 const authRoutes = require('./src/routes/auth');
-
+const categoryRoutes=require("./src/admin/routes/categoryRoutes")
 
 // Using routes
 app.use('/auth', authRoutes);
+app.use('/admin', categoryRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
