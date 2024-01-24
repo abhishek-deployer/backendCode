@@ -12,10 +12,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Importing routes
 const authRoutes = require('./src/routes/auth');
 const categoryRoutes=require("./src/admin/routes/categoryRoutes")
+const productRoutes=require("./src/admin/routes/productRoutes")
 
 // Using routes
 app.use('/auth', authRoutes);
 app.use('/admin', categoryRoutes);
+app.use('/admin', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
