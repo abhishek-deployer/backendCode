@@ -2,7 +2,7 @@ const Product = require('../schema/productSchema');
 
 const createProduct = async (req, res) => {
   try {
-    const {categoryName, productName } = req.body;
+    const {categoryName, productName,price } = req.body;
     // Check if the product already exists
     const existingProduct = await Product.findOne({ productName });
 
@@ -10,7 +10,7 @@ const createProduct = async (req, res) => {
       return res.status(409).json({ message: 'Product already exists' });
     }
 
-    const newProduct = new Product({categoryName, productName });
+    const newProduct = new Product({categoryName, productName,price });
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
   } catch (error) {
@@ -48,11 +48,11 @@ const getProductById = async (req, res) => {
 const updateProductById = async (req, res) => {
   try {
     const productId = req.params.id;
-    const { productName ,categoryName} = req.body;
+    const { productName ,categoryName,price} = req.body;
 
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      { productName,categoryName },
+      { productName,categoryName ,price},
       { new: true }
     );
 
@@ -82,7 +82,6 @@ const deleteProductById = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
 module.exports = {
   createProduct,
   getAllProducts,
